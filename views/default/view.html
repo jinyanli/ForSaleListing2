@@ -1,0 +1,36 @@
+{{extend 'layout.html'}}
+<h1>Post</h1>
+<div >
+<p>{{=A('Back', _class='btn btn-primary', _href=URL('default', 'index'))}}
+{{if auth.user_id == row.user_id:}}
+{{= A('Edit', _class='btn btn-warning', _href=URL('default', 'edit', args=[row.id]))}}
+{{= A('Delete', _class='btn btn-danger', _href=URL('default', 'delete', args=[row.id], user_signature=True))}}</p>
+{{pass}}
+</br>
+<h1>Photo:</h1>
+<p><img width="400px" src="{{=URL('download', args=image)}}" /></p>
+</div>
+<h1>Gallery:</h1>
+<div class ="one" style="text-align:center" id="a"></div>
+<div class ="well">
+<div class ="two" style="text-align:center" id="b"></div>
+{{for anImage in images:}}
+  <img width="60px" height="60px" class="img-thumbnail" src="{{=URL('download', args=anImage.image)}}" />
+{{pass}}
+{{=form}}
+{{if auth.user_id == row.user_id:}}
+{{=imgForm}}
+{{pass}}
+<script>
+$(document).ready(function() {
+    $('.img-thumbnail').on('click', function() {
+        var img = $('<img />', {src: this.src, 'class': 'img-thumbnail'});
+        $('DIV.one').html(img).show();
+        $('DIV.two').html(img2).hide();
+    });
+    $('.img-thumbnail').on('mouseover', function() {
+        var img2 = $('<img />', {src: this.src, 'width': '140px', 'height': '100px', 'class': 'img-thumbnail'});
+        $('DIV.two').html(img2).show();
+    });
+});
+</script>
