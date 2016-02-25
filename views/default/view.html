@@ -7,14 +7,12 @@
 {{= A('Delete', _class='btn btn-danger', _href=URL('default', 'delete', args=[row.id], user_signature=True))}}</p>
 {{pass}}
 </br>
-<h1>Photo:</h1>
-<p><img width="200px" class="img-thumbnail title" src="{{=URL('download', args=image)}}" /></p>
 </div>
-<h1>Gallery:</h1>
+<h1>Photo Gallery:</h1>
 <div class ="one" style="text-align:center" id="a"></div>
 <div class ="well">
 {{for anImage in images:}}
-  <img width="100px" height="100px" id="image{{=anImage.id}}"class="img-thumbnail" src="{{=URL('download', args=anImage.image)}}" />
+  <img width="100px" height="100px" id="image{{=anImage.id}}" class="img-thumbnail unchecked"  src="{{=URL('download', args=anImage.image)}}" />
 {{pass}}
 {{=form}}
 {{if auth.user_id == row.user_id:}}
@@ -26,25 +24,20 @@ var flag=0;
 $(document).ready(function() {
     $('.img-thumbnail').on('click', function() {
       console.log($(this).attr('class'));
-        if (flag==0) {
+        if ($(this).attr('class')=="img-thumbnail unchecked") {
            $(this).attr({
                'width': '400px',
                'height': '400px',
+               'class':'img-thumbnail checked'
             });
             flag=1;
          }
          else{
-           if ($(this).attr('class')=="img-thumbnail title"){
-                $(this).attr({
-                   'width': '200px',
-                   'height': '200px',
-                 });
-              }else{
                  $(this).attr({
                    'width': '100px',
                    'height': '100px',
+                   'class':'img-thumbnail unchecked'
                 });
-              }
            flag=0;
          }
     });

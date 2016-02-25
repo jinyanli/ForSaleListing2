@@ -1,6 +1,29 @@
 {{extend 'layout.html'}}
+{{import string}}
 <h1>Welcome To For Sale Listings</h1>
 
-{{=grid}}
+{{#=grid}}
+<ol type ="1">
+<form><input type="hidden" id="id" name="id" value="" /></form>
+{{for post in posts:}}
+<div class ="panel panel-default">
+  <div class="panel-heading">
+     <li>
+     {{=A(post.title, _href=URL("view", args=post.id))}}
+       <b> Votes=</b><span id="post{{=post.id}}">{{=post.votes}}</span>
+       <p><img width="200px" class="img-thumbnail title" src="{{=URL('download', args=post.image)}}" /></p>
+    </li>
+  </div>
+  <div class="panel-body">
+    <button class="btn btn-success" <span onclick="jQuery('#id').val('{{=post.id}}');
+         ajax('{{=URL('default', 'voteUp')}}', ['id'], 'post{{=post.id}}');"></span>thumbs-up</button>
+
+    <button class="btn btn-danger" <span onclick="jQuery('#id').val('{{=post.id}}');
+         ajax('{{=URL('default', 'voteDown')}}', ['id'], 'post{{=post.id}}');"></span>thumbs-down</button>
+  </div>
+</div>
+  <br>
+{{pass}}
+</ol>
 {{=A('Add a post', _class='btn btn-primary', _href=URL('default', 'add'))}}
 {{=button}}

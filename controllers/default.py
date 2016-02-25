@@ -9,15 +9,15 @@
 #########################################################################
 
 def index():
-    session.flash = T(request.args(0))
+    #session.flash = T(request.args(0))
     unsold = request.args(0) == 'unsold'
 
     if  unsold:
-        session.flash = T("See All")
+        #session.flash = ("See All")
         forsale=(db.forsale.sold==False)
         button = A('See all', _class='btn btn-success', _href=URL('default', 'index'))
     else:
-        session.flash = T("Show  Unsold")
+        #session.flash = ("Show  Unsold")
         forsale=db.forsale
         button = A('See Unsold', _class='btn btn-warning', _href=URL('default', 'index', args='unsold'))
 
@@ -60,8 +60,22 @@ def index():
 
     grid = SQLFORM.grid(forsale, csv=False, create=False, searchable=False, args=request.args[:1],
                         links=links, editable=False, deletable=False, details=False)
+    posts=db(db.forsale).select(db.forsale.ALL)
     return locals()
 
+#@auth.requires_login()
+def voteUp():
+    item = db.forsale[request.vars.id]
+    new_votes = item.votes + 1
+    item.update_record(votes=new_votes)
+    return str(new_votes)
+
+@auth.requires_login()
+def voteDown():
+    item = db.forsale[request.vars.id]
+    new_votes = item.votes - 1
+    item.update_record(votes=new_votes)
+    return str(new_votes)
 
 def view():
     """View a post."""

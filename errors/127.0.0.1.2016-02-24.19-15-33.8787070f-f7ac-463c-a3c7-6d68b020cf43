@@ -1,0 +1,19 @@
+(dp1
+S'output'
+p2
+S''
+sS'layer'
+p3
+S'Framework'
+p4
+sS'code'
+p5
+S''
+sS'snapshot'
+p6
+(dp7
+sS'traceback'
+p8
+S'Traceback (most recent call last):\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\main.py", line 483, in wsgibase\n    session._try_store_in_cookie_or_file(request, response)\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\globals.py", line 1188, in _try_store_in_cookie_or_file\n    return self._try_store_in_file(request, response)\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\globals.py", line 1195, in _try_store_in_file\n    or self._unchanged(response)):\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\globals.py", line 1140, in _unchanged\n    session_pickled = pickle.dumps(self, pickle.HIGHEST_PROTOCOL)\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\languages.py", line 441, in pickle_lazyT\n    return str, (c.xml(),)\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\languages.py", line 423, in xml\n    return str(self) if self.M else escape(str(self))\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\languages.py", line 383, in __str__\n    self.T.translate(self.m, self.s))\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\languages.py", line 929, in translate\n    lambda: self.get_t(message))\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\languages.py", line 143, in get_from_cache\n    result = lang_dict.setdefault(val, fun())\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\languages.py", line 929, in <lambda>\n    lambda: self.get_t(message))\n  File "C:\\Users\\Jinyan\\Desktop\\ucsc\\2016Winter\\CMPS183\\web2py\\gluon\\languages.py", line 801, in get_t\n    key = prefix + message\nTypeError: cannot concatenate \'str\' and \'NoneType\' objects\n'
+p9
+s.

@@ -16,7 +16,7 @@ db.define_table('forsale',
                 Field('price','double'),
                 Field('sold','boolean'),
                 Field('description', 'text'),
-                Field('votes', 'integer', readable=False, writable=False, default=0)
+                Field('votes', 'integer', readable=False ,writable=False, default=0)
                 )
 
 db.define_table('imageList',
