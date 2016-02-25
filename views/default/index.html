@@ -10,16 +10,24 @@
   <div class="panel-heading">
      <li>
      <h4>{{=A(post.title, _href=URL("view", args=post.id))}}</h4>
-       <b>Likes=</b><span id="post{{=post.id}}">{{=post.votes}}</span>
-       <p><img width="200px" class="img-thumbnail title" src="{{=URL('download', args=post.image)}}" /></p>
+       <h6><b>Votes=<span id="post{{=post.id}}">{{=post.votes}}</span></b></h6>
+       <p><img width="200px"  class="img-thumbnail unchecked" src="{{=URL('download', args=post.image)}}" /></p>
     </li>
   </div>
   <div class="panel-body">
+    {{if auth.user:}}
+    <button id="plus" class="btn btn-success" onclick="ajax('{{=URL('vote',args=(post.id,'plus'))}}',[],'post{{=post.id}}')">Thumbs‐Up</button>
+    <button id="minus" class="btn btn-danger" onclick="ajax('{{=URL('vote',args=(post.id,'minus'))}}',[],'post{{=post.id}}')">Thumbs‐Down</button>
+    {{else:}}
+    <p>Log In To Vote</p>
+    {{pass}}
+  <!--
     <button class="btn btn-success" <span onclick="jQuery('#id').val('{{=post.id}}');
-         ajax('{{=URL('default', 'voteUp')}}', ['id'], 'post{{=post.id}}');"></span>Like</button>
+         ajax('{{=URL('default', 'voteUp')}}', ['id'], 'post{{=post.id}}');"></span>Thumbs‐Up</button>
 
     <button class="btn btn-danger" <span onclick="jQuery('#id').val('{{=post.id}}');
-         ajax('{{=URL('default', 'voteDown')}}', ['id'], 'post{{=post.id}}');"></span>Dislike</button>
+         ajax('{{=URL('default', 'voteDown')}}', ['id'], 'post{{=post.id}}');"></span>Thumbs‐Down</button>
+       -->
   </div>
 </div>
   <br>
@@ -27,3 +35,23 @@
 </ol>
 {{=A('Add a post', _class='btn btn-primary', _href=URL('default', 'add'))}}
 {{=button}}
+
+<script>
+$(document).ready(function() {
+    $('.img-thumbnail').on('click', function() {
+      console.log($(this).attr('class'));
+        if ($(this).attr('class')=="img-thumbnail unchecked") {
+           $(this).attr({
+               'width': '600px',
+               'class':'img-thumbnail checked'
+            });
+         }
+         else{
+                 $(this).attr({
+                   'width': '200px',
+                   'class':'img-thumbnail unchecked'
+                });
+         }
+    });
+});
+</script>

@@ -19,6 +19,12 @@ db.define_table('forsale',
                 Field('votes', 'integer', readable=False ,writable=False, default=0)
                 )
 
+db.define_table('vote',
+                Field('forsale_id','reference forsale'),
+                Field('value','integer'),
+                Field('posted_on','datetime',readable=False,writable=False),
+                Field('posted_by','reference auth_user',readable=False,writable=False))
+
 db.define_table('imageList',
   Field('forsale_id', 'reference forsale', readable=False , writable=False),
   Field('image', 'upload'))

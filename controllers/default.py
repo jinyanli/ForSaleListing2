@@ -63,7 +63,7 @@ def index():
     posts=db(db.forsale).select(db.forsale.ALL)
     return locals()
 
-#@auth.requires_login()
+@auth.requires_login()
 def voteUp():
     item = db.forsale[request.vars.id]
     new_votes = item.votes + 1
@@ -76,6 +76,28 @@ def voteDown():
     new_votes = item.votes - 1
     item.update_record(votes=new_votes)
     return str(new_votes)
+
+"got the code from one of the reddit clone example on web2py.com"
+@auth.requires_login()
+def vote():
+    if request.env.request_method!='POST': raise HTTP(400)
+    post_id, mode = request.args(0), request.args(1)
+    post = db.forsale(post_id)
+    vote = db.vote(posted_by=auth.user.id, forsale_id=post_id)
+    votes = post.votes
+    value = (mode=='plus') and +1 or -1
+    if vote and value*vote.value==1:
+        session.flash = 'you voted already'
+    else:
+        if vote:
+            votes += value - vote.value
+            vote.update_record(value=value)
+        else:
+            votes += value
+            db.vote.insert(value=value,posted_by=auth.user.id,posted_on=request.now,forsale_id=post_id)
+        post.update_record(votes=votes)
+        session.flash = 'vote recorded'
+    return str(votes)
 
 def view():
     """View a post."""
