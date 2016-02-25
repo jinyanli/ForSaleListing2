@@ -9,17 +9,17 @@
 <div class ="panel panel-default">
   <div class="panel-heading">
      <li>
-     {{=A(post.title, _href=URL("view", args=post.id))}}
-       <b> Votes=</b><span id="post{{=post.id}}">{{=post.votes}}</span>
+     <h4>{{=A(post.title, _href=URL("view", args=post.id))}}</h4>
+       <b>Likes=</b><span id="post{{=post.id}}">{{=post.votes}}</span>
        <p><img width="200px" class="img-thumbnail title" src="{{=URL('download', args=post.image)}}" /></p>
     </li>
   </div>
   <div class="panel-body">
     <button class="btn btn-success" <span onclick="jQuery('#id').val('{{=post.id}}');
-         ajax('{{=URL('default', 'voteUp')}}', ['id'], 'post{{=post.id}}');"></span>thumbs-up</button>
+         ajax('{{=URL('default', 'voteUp')}}', ['id'], 'post{{=post.id}}');"></span>Like</button>
 
     <button class="btn btn-danger" <span onclick="jQuery('#id').val('{{=post.id}}');
-         ajax('{{=URL('default', 'voteDown')}}', ['id'], 'post{{=post.id}}');"></span>thumbs-down</button>
+         ajax('{{=URL('default', 'voteDown')}}', ['id'], 'post{{=post.id}}');"></span>Dislike</button>
   </div>
 </div>
   <br>
