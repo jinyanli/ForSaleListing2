@@ -1,12 +1,13 @@
 {{extend 'layout.html'}}
 {{import string}}
 <h1>Welcome To For Sale Listings</h1>
-
+<h2>Notice: Once you up vote a post, you can either only down vote it or up vote it again, and vice versa</h2>
+<h4>Here is the example i use for voting:<a href="https://github.com/mdipierro/web2py-appliances/tree/master/RedditClone">https://github.com/mdipierro/web2py-appliances/tree/master/RedditClone</a></h4>
 {{#=grid}}
 <ol type ="1">
 <form><input type="hidden" id="id" name="id" value="" /></form>
 {{for post in posts:}}
-<div class ="panel panel-default">
+<div class ="panel panel-default"><a href="url">
   <div class="panel-heading">
      <li>
      <h4>{{=A(post.title, _href=URL("view", args=post.id))}}</h4>
