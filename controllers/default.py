@@ -77,7 +77,10 @@ def voteDown():
     item.update_record(votes=new_votes)
     return str(new_votes)
 
-"got the code from one of the reddit clone example on web2py.com"
+"""
+got the code from reddit clone example on web2py.com
+https://github.com/mdipierro/web2py-appliances/tree/master/RedditClone
+"""
 @auth.requires_login()
 def vote():
     if request.env.request_method!='POST': raise HTTP(400)

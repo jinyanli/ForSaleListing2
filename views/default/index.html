@@ -11,7 +11,7 @@
      <li>
      <h4>{{=A(post.title, _href=URL("view", args=post.id))}}</h4>
        <h6><b>Votes=<span id="post{{=post.id}}">{{=post.votes}}</span></b></h6>
-       <p><img width="200px"  class="img-thumbnail unchecked" src="{{=URL('download', args=post.image)}}" /></p>
+       <p><img width="200px"  class="img-thumbnail unchecked" check="t" src="{{=URL('download', args=post.image)}}" /></p>
     </li>
   </div>
   <div class="panel-body">
@@ -40,16 +40,16 @@
 $(document).ready(function() {
     $('.img-thumbnail').on('click', function() {
       console.log($(this).attr('class'));
-        if ($(this).attr('class')=="img-thumbnail unchecked") {
+        if ($(this).attr('check')=="t") {
            $(this).attr({
                'width': '600px',
-               'class':'img-thumbnail checked'
+               'check':'f'
             });
          }
          else{
                  $(this).attr({
                    'width': '200px',
-                   'class':'img-thumbnail unchecked'
+                   'check':'t'
                 });
          }
     });
