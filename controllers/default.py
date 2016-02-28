@@ -65,16 +65,22 @@ def index():
 
 @auth.requires_login()
 def voteUp():
-    item = db.forsale[request.vars.id]
-    new_votes = item.votes + 1
-    item.update_record(votes=new_votes)
+    #item = db.forsale[request.vars.id]
+    user=db.auth_user(request.vars.id)
+    if user.votes is None:
+       user.update_record(votes=0)
+    new_votes = user.votes + 1
+    user.update_record(votes=new_votes)
     return str(new_votes)
 
 @auth.requires_login()
 def voteDown():
-    item = db.forsale[request.vars.id]
-    new_votes = item.votes - 1
-    item.update_record(votes=new_votes)
+    #item = db.forsale[request.vars.id]
+    user=db.auth_user(request.vars.id)
+    if user.votes is None:
+       user.update_record(votes=0)
+    new_votes = user.votes - 1
+    user.update_record(votes=new_votes)
     return str(new_votes)
 
 """

@@ -2,10 +2,12 @@ db = DAL("sqlite://storage.sqlite")
 
 from gluon.tools import Auth
 auth = Auth(db)
+auth.settings.extra_fields['auth_user']= [
+                  Field('votes', 'integer', readable=False ,writable=False, default=0)
+                 ]
 auth.define_tables(username=True)
 
 db.define_table('forsale',
-                Field('seller_name'),
                 Field('user_id', db.auth_user),
                 Field('phone'),
                 Field('email'),
@@ -20,8 +22,8 @@ db.define_table('forsale',
                 )
 
 db.define_table('vote',
-                Field('forsale_id','reference forsale'),
-                Field('value','integer'),
+                Field('forsale','reference forsale'),
+                Field('value','integer', default=0),
                 Field('posted_on','datetime',readable=False,writable=False),
                 Field('posted_by','reference auth_user',readable=False,writable=False))
 

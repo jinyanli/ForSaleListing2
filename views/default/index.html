@@ -1,9 +1,11 @@
 {{extend 'layout.html'}}
 {{import string}}
 <h1>Welcome To For Sale Listings</h1>
+<!--
 <h2>Notice: Once you up vote a post, you can either only down vote it or up vote it again, and vice versa</h2>
 <h4>Here is the example i use for voting:<a href="https://github.com/mdipierro/web2py-appliances/tree/master/RedditClone">https://github.com/mdipierro/web2py-appliances/tree/master/RedditClone</a></h4>
 {{#=grid}}
+-->
 <ol type ="1">
 <form><input type="hidden" id="id" name="id" value="" /></form>
 {{for post in posts:}}
@@ -11,25 +13,29 @@
   <div class="panel-heading">
      <li>
      <h4>{{=A(post.title, _href=URL("view", args=post.id))}}</h4>
-       <h6><b>Votes=<span id="post{{=post.id}}">{{=post.votes}}</span></b></h6>
+     {{seller=db.auth_user(post.user_id)}}
+     <h6><b>Seller:</b>{{=seller.first_name+' '+seller.last_name}}</h6>
+       <!--<b>Rating=<span id="post{{=post.id}}">{{=db.auth_user(post.user_id).votes}}</span></b></h6>-->
        <p><img width="200px"  class="img-thumbnail unchecked" check="t" src="{{=URL('download', args=post.image)}}" /></p>
     </li>
   </div>
-  <div class="panel-body">
-    {{if auth.user:}}
+  <!--   <div class="panel-body">
+ {{if auth.user:}}
+
     <button id="plus" class="btn btn-success" onclick="ajax('{{=URL('vote',args=(post.id,'plus'))}}',[],'post{{=post.id}}')">Thumbs‐Up</button>
     <button id="minus" class="btn btn-danger" onclick="ajax('{{=URL('vote',args=(post.id,'minus'))}}',[],'post{{=post.id}}')">Thumbs‐Down</button>
-    {{else:}}
-    <p>Log In To Vote</p>
-    {{pass}}
-  <!--
-    <button class="btn btn-success" <span onclick="jQuery('#id').val('{{=post.id}}');
-         ajax('{{=URL('default', 'voteUp')}}', ['id'], 'post{{=post.id}}');"></span>Thumbs‐Up</button>
 
-    <button class="btn btn-danger" <span onclick="jQuery('#id').val('{{=post.id}}');
-         ajax('{{=URL('default', 'voteDown')}}', ['id'], 'post{{=post.id}}');"></span>Thumbs‐Down</button>
-       -->
-  </div>
+      <button class="btn btn-success" <span onclick="jQuery('#id').val('{{=post.id}}');
+           ajax('{{=URL('default', 'voteUp')}}', ['id'], 'post{{=post.id}}');"></span>Thumbs‐Up</button>
+
+      <button class="btn btn-danger" <span onclick="jQuery('#id').val('{{=post.id}}');
+           ajax('{{=URL('default', 'voteDown')}}', ['id'], 'post{{=post.id}}');"></span>Thumbs‐Down</button>
+
+    {{else:}}
+    <p>Log In To Rate</p>
+    {{pass}}
+
+  </div>-->
 </div>
   <br>
 {{pass}}

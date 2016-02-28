@@ -1,5 +1,6 @@
 {{extend 'layout.html'}}
 <h1>Post</h1>
+<form><input type="hidden" id="id" name="id" value="" /></form>
 <div >
 <p>{{=A('Back', _class='btn btn-primary', _href=URL('default', 'index'))}}
 {{if auth.user_id == row.user_id:}}
@@ -14,7 +15,27 @@
 {{for anImage in images:}}
   <img width="100px" height="100px" id="image{{=anImage.id}}" class="img-thumbnail unchecked"  src="{{=URL('download', args=anImage.image)}}" />
 {{pass}}
-{{=form}}
+{{seller=db.auth_user(row.user_id)}}
+<p><b>Seller:</b>{{=seller.first_name+' '+seller.last_name}}</p>
+<p><b>Seller Rating:</b><span id="seller{{=seller.id}}">{{=seller.votes}}</span></p>
+<p><b>Title:</b>{{=row.title}}</p>
+<p><b>Phone Number:</b>{{=row.phone}}</p>
+<p><b>Email:</b>{{=row.email}}</p>
+<p><b>Category:</b>{{=row.category}}</p>
+<p><b>Price:</b>{{=row.price}}</p>
+<p><b>Sold:</b>{{=row.sold}}</p>
+<p><b>Description:</b>{{=row.description}}</p>
+
+{{if auth.user:}}
+  <button class="btn btn-success" <span onclick="jQuery('#id').val('{{=seller.id}}');
+       ajax('{{=URL('default', 'voteUp')}}', ['id'], 'seller{{=seller.id}}');"></span>Thumbs‐Up</button>
+
+  <button class="btn btn-danger" <span onclick="jQuery('#id').val('{{=seller.id}}');
+       ajax('{{=URL('default', 'voteDown')}}', ['id'], 'seller{{=seller.id}}');"></span>Thumbs‐Down</button>
+
+{{else:}}
+<p>Log In To Rate</p>
+{{pass}}
 {{if auth.user_id == row.user_id:}}
 <h2>Upload More Images</h2>
 {{=imgForm}}
