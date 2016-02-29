@@ -27,14 +27,16 @@
 <p><b>Description:</b>{{=row.description}}</p>
 
 {{if auth.user:}}
-  <button class="btn btn-success" <span onclick="jQuery('#id').val('{{=seller.id}}');
-       ajax('{{=URL('default', 'voteUp')}}', ['id'], 'seller{{=seller.id}}');"></span>Thumbs‐Up</button>
+      {{if seller.id !=auth.user.id:}}
+      <button class="btn btn-success" <span onclick="jQuery('#id').val('{{=seller.id}}');
+           ajax('{{=URL('default', 'voteUp')}}', ['id'], 'seller{{=seller.id}}');"></span>Thumbs‐Up</button>
 
-  <button class="btn btn-danger" <span onclick="jQuery('#id').val('{{=seller.id}}');
-       ajax('{{=URL('default', 'voteDown')}}', ['id'], 'seller{{=seller.id}}');"></span>Thumbs‐Down</button>
+      <button class="btn btn-danger" <span onclick="jQuery('#id').val('{{=seller.id}}');
+           ajax('{{=URL('default', 'voteDown')}}', ['id'], 'seller{{=seller.id}}');"></span>Thumbs‐Down</button>
+      {{pass}}
 
 {{else:}}
-<p>Log In To Rate</p>
+    <p>Log In To Rate</p>
 {{pass}}
 {{if auth.user_id == row.user_id:}}
 <h2>Upload More Images</h2>
